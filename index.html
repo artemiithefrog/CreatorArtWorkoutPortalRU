@@ -54,20 +54,69 @@
       margin: 20px 0;
       border-radius: 5px;
     }
+    .language-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .language-btn {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .language-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: none;
+      min-width: 150px;
+    }
+    .language-dropdown.show {
+      display: block;
+    }
+    .language-option {
+      padding: 10px 15px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+    .language-option:hover {
+      background: #f5f5f5;
+    }
+    .language-option:last-child {
+      border-bottom: none;
+    }
   </style>
 </head>
 <body>
 
-  <h1>📘 Часто задаваемые вопросы<br>по личному кабинету <strong>Stacker</strong></h1>
+  <div class="language-selector">
+    <button class="language-btn" onclick="toggleLanguageDropdown()">🌐 Language</button>
+    <div class="language-dropdown" id="languageDropdown">
+      <div class="language-option" onclick="changeLanguage('ru')">🇷🇺 Русский</div>
+      <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+      <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+    </div>
+  </div>
+
+  <h1 id="main-title">📘 Часто задаваемые вопросы<br>по личному кабинету <strong>Stacker</strong></h1>
 
   <div class="section">
-    <h2>🔐 После регистрации</h2>
-    <p>После успешной регистрации вас автоматически перенаправит в личный кабинет.</p>
+    <h2 id="after-registration">🔐 После регистрации</h2>
+    <p id="after-registration-text">После успешной регистрации вас автоматически перенаправит в личный кабинет.</p>
   </div>
 
   <div class="section">
-    <h2>📄 Страницы в личном кабинете</h2>
-    <ul>
+    <h2 id="pages-title">📄 Страницы в личном кабинете</h2>
+    <ul id="pages-list">
       <li>👤 <strong>Creators</strong> — ваш личный профиль. Нажмите на него, чтобы отредактировать данные.</li>
       <li>📱 <strong>Accounts</strong> — список аккаунтов в соцсетях. Обязательно добавьте все аккаунты, которые вы ведёте.</li>
       <li>📆 <strong>Monthly Reports</strong> — ежемесячные отчёты по вашей работе.</li>
@@ -77,16 +126,16 @@
   </div>
 
   <div class="section">
-    <h2>📋 Памятка по использованию</h2>
+    <h2 id="usage-guide-title">📋 Памятка по использованию</h2>
     
     <div class="warning">
-      <strong>⚠️ Важно! После регистрации обязательно выполните следующие действия:</strong>
+      <strong id="important-note">⚠️ Важно! После регистрации обязательно выполните следующие действия:</strong>
     </div>
 
     <div class="highlight">
-      <h3>1️⃣ Добавление социальных сетей</h3>
-      <p>Перейдите в раздел <strong>Accounts</strong> и добавьте <strong>все</strong> свои социальные сети, на которых вы снимаете видео для ArtWorkout:</p>
-      <ul>
+      <h3 id="social-networks-title">1️⃣ Добавление социальных сетей</h3>
+      <p id="social-networks-text">Перейдите в раздел <strong>Accounts</strong> и добавьте <strong>все</strong> свои социальные сети, на которых вы снимаете видео для ArtWorkout:</p>
+      <ul id="social-networks-list">
         <li>YouTube</li>
         <li>TikTok</li>
         <li>Instagram</li>
@@ -95,35 +144,189 @@
     </div>
 
     <div class="highlight">
-      <h3>2️⃣ Настройка платежной информации</h3>
-      <p>В разделе <strong>Creators</strong> (ваш профиль) обязательно заполните:</p>
-      <ul>
+      <h3 id="payment-info-title">2️⃣ Настройка платежной информации</h3>
+      <p id="payment-info-text">В разделе <strong>Creators</strong> (ваш профиль) обязательно заполните:</p>
+      <ul id="payment-info-list">
         <li><strong>Payment Method</strong> — выберите способ получения выплат</li>
         <li><strong>Payment Details</strong> — укажите реквизиты для перевода денег</li>
       </ul>
-      <p><strong>Без указания платежной информации выплаты не будут произведены!</strong></p>
+      <p id="payment-warning"><strong>Без указания платежной информации выплаты не будут произведены!</strong></p>
     </div>
   </div>
 
   <div class="section">
-    <h2>❓ Часто задаваемые вопросы</h2>
+    <h2 id="faq-title">❓ Часто задаваемые вопросы</h2>
 
-    <p class="question">🌐 Какой язык выбрать при заполнении?</p>
-    <p>Выбирайте язык, на котором вы ведёте аккаунт. Например, если вы ведёте блог на русском — выбирайте русский язык.</p>
+    <p class="question" id="language-question">🌐 Какой язык выбрать при заполнении?</p>
+    <p id="language-answer">Выбирайте язык, на котором вы ведёте аккаунт. Например, если вы ведёте блог на русском — выбирайте русский язык.</p>
 
-    <p class="question">📩 К кому обращаться, если возникли вопросы?</p>
-    <p>По всем вопросам, связанным с аккаунтом, можно обратиться к <strong>Гузель</strong>:</p>
+    <p class="question" id="contact-question">📩 К кому обращаться, если возникли вопросы?</p>
+    <p id="contact-answer">По всем вопросам, связанным с аккаунтом, можно обратиться к <strong>Гузель</strong>:</p>
   </div>
 
   <div class="contact-info">
-    <h3>📞 Контактная информация</h3>
+    <h3 id="contact-info-title">📞 Контактная информация</h3>
     <p><strong>Telegram:</strong> <a href="https://t.me/GizelN">@GizelN</a></p>
     <p><strong>Email:</strong> <a href="mailto:g.nugmanova@artworkout.app">g.nugmanova@artworkout.app</a></p>
   </div>
 
   <div class="highlight">
-    💡 <strong>Совет:</strong> Заполните все разделы сразу после регистрации, чтобы начать работу без задержек.
+    💡 <strong id="tip-text">Совет:</strong> <span id="tip-content">Заполните все разделы сразу после регистрации, чтобы начать работу без задержек.</span>
   </div>
+
+  <script>
+    const translations = {
+      ru: {
+        'main-title': '📘 Часто задаваемые вопросы<br>по личному кабинету <strong>Stacker</strong>',
+        'after-registration': '🔐 После регистрации',
+        'after-registration-text': 'После успешной регистрации вас автоматически перенаправит в личный кабинет.',
+        'pages-title': '📄 Страницы в личном кабинете',
+        'pages-list': [
+          '👤 <strong>Creators</strong> — ваш личный профиль. Нажмите на него, чтобы отредактировать данные.',
+          '📱 <strong>Accounts</strong> — список аккаунтов в соцсетях. Обязательно добавьте все аккаунты, которые вы ведёте.',
+          '📆 <strong>Monthly Reports</strong> — ежемесячные отчёты по вашей работе.',
+          '💸 <strong>Payments</strong> — история выплат, основанная на отчётах.',
+          '🧾 <strong>Creator Page</strong> — объединённая страница с таблицами по выплатам, отчетами и профилем.'
+        ],
+        'usage-guide-title': '📋 Памятка по использованию',
+        'important-note': '⚠️ Важно! После регистрации обязательно выполните следующие действия:',
+        'social-networks-title': '1️⃣ Добавление социальных сетей',
+        'social-networks-text': 'Перейдите в раздел <strong>Accounts</strong> и добавьте <strong>все</strong> свои социальные сети, на которых вы снимаете видео для ArtWorkout:',
+        'social-networks-list': ['YouTube', 'TikTok', 'Instagram', 'Другие платформы, где вы публикуете контент'],
+        'payment-info-title': '2️⃣ Настройка платежной информации',
+        'payment-info-text': 'В разделе <strong>Creators</strong> (ваш профиль) обязательно заполните:',
+        'payment-info-list': [
+          '<strong>Payment Method</strong> — выберите способ получения выплат',
+          '<strong>Payment Details</strong> — укажите реквизиты для перевода денег'
+        ],
+        'payment-warning': '<strong>Без указания платежной информации выплаты не будут произведены!</strong>',
+        'faq-title': '❓ Часто задаваемые вопросы',
+        'language-question': '🌐 Какой язык выбрать при заполнении?',
+        'language-answer': 'Выбирайте язык, на котором вы ведёте аккаунт. Например, если вы ведёте блог на русском — выбирайте русский язык.',
+        'contact-question': '📩 К кому обращаться, если возникли вопросы?',
+        'contact-answer': 'По всем вопросам, связанным с аккаунтом, можно обратиться к <strong>Гузель</strong>:',
+        'contact-info-title': '📞 Контактная информация',
+        'tip-text': 'Совет:',
+        'tip-content': 'Заполните все разделы сразу после регистрации, чтобы начать работу без задержек.'
+      },
+      en: {
+        'main-title': '📘 Frequently Asked Questions<br>for <strong>Stacker</strong> Personal Account',
+        'after-registration': '🔐 After Registration',
+        'after-registration-text': 'After successful registration, you will be automatically redirected to your personal account.',
+        'pages-title': '📄 Pages in Personal Account',
+        'pages-list': [
+          '👤 <strong>Creators</strong> — your personal profile. Click on it to edit your data.',
+          '📱 <strong>Accounts</strong> — list of social media accounts. Be sure to add all accounts you manage.',
+          '📆 <strong>Monthly Reports</strong> — monthly reports on your work.',
+          '💸 <strong>Payments</strong> — payment history based on reports.',
+          '🧾 <strong>Creator Page</strong> — combined page with payment tables, reports and profile.'
+        ],
+        'usage-guide-title': '📋 Usage Guide',
+        'important-note': '⚠️ Important! After registration, be sure to complete the following actions:',
+        'social-networks-title': '1️⃣ Adding Social Networks',
+        'social-networks-text': 'Go to the <strong>Accounts</strong> section and add <strong>all</strong> your social networks where you shoot videos for ArtWorkout:',
+        'social-networks-list': ['YouTube', 'TikTok', 'Instagram', 'Other platforms where you publish content'],
+        'payment-info-title': '2️⃣ Payment Information Setup',
+        'payment-info-text': 'In the <strong>Creators</strong> section (your profile), be sure to fill in:',
+        'payment-info-list': [
+          '<strong>Payment Method</strong> — choose the method of receiving payments',
+          '<strong>Payment Details</strong> — specify the details for money transfer'
+        ],
+        'payment-warning': '<strong>Without specifying payment information, payments will not be made!</strong>',
+        'faq-title': '❓ Frequently Asked Questions',
+        'language-question': '🌐 Which language to choose when filling out?',
+        'language-answer': 'Choose the language in which you run your account. For example, if you run a blog in Russian — choose Russian language.',
+        'contact-question': '📩 Who to contact if you have questions?',
+        'contact-answer': 'For all questions related to your account, you can contact <strong>Guzel</strong>:',
+        'contact-info-title': '📞 Contact Information',
+        'tip-text': 'Tip:',
+        'tip-content': 'Fill out all sections immediately after registration to start working without delays.'
+      },
+      es: {
+        'main-title': '📘 Preguntas Frecuentes<br>para la Cuenta Personal de <strong>Stacker</strong>',
+        'after-registration': '🔐 Después del Registro',
+        'after-registration-text': 'Después del registro exitoso, serás redirigido automáticamente a tu cuenta personal.',
+        'pages-title': '📄 Páginas en la Cuenta Personal',
+        'pages-list': [
+          '👤 <strong>Creators</strong> — tu perfil personal. Haz clic en él para editar tus datos.',
+          '📱 <strong>Accounts</strong> — lista de cuentas de redes sociales. Asegúrate de agregar todas las cuentas que administras.',
+          '📆 <strong>Monthly Reports</strong> — informes mensuales sobre tu trabajo.',
+          '💸 <strong>Payments</strong> — historial de pagos basado en informes.',
+          '🧾 <strong>Creator Page</strong> — página combinada con tablas de pagos, informes y perfil.'
+        ],
+        'usage-guide-title': '📋 Guía de Uso',
+        'important-note': '⚠️ ¡Importante! Después del registro, asegúrate de completar las siguientes acciones:',
+        'social-networks-title': '1️⃣ Agregar Redes Sociales',
+        'social-networks-text': 'Ve a la sección <strong>Accounts</strong> y agrega <strong>todas</strong> tus redes sociales donde grabas videos para ArtWorkout:',
+        'social-networks-list': ['YouTube', 'TikTok', 'Instagram', 'Otras plataformas donde publicas contenido'],
+        'payment-info-title': '2️⃣ Configuración de Información de Pago',
+        'payment-info-text': 'En la sección <strong>Creators</strong> (tu perfil), asegúrate de completar:',
+        'payment-info-list': [
+          '<strong>Payment Method</strong> — elige el método de recepción de pagos',
+          '<strong>Payment Details</strong> — especifica los detalles para la transferencia de dinero'
+        ],
+        'payment-warning': '<strong>¡Sin especificar la información de pago, los pagos no se realizarán!</strong>',
+        'faq-title': '❓ Preguntas Frecuentes',
+        'language-question': '🌐 ¿Qué idioma elegir al completar?',
+        'language-answer': 'Elige el idioma en el que administras tu cuenta. Por ejemplo, si administras un blog en ruso — elige el idioma ruso.',
+        'contact-question': '📩 ¿A quién contactar si tienes preguntas?',
+        'contact-answer': 'Para todas las preguntas relacionadas con tu cuenta, puedes contactar a <strong>Guzel</strong>:',
+        'contact-info-title': '📞 Información de Contacto',
+        'tip-text': 'Consejo:',
+        'tip-content': 'Completa todas las secciones inmediatamente después del registro para comenzar a trabajar sin demoras.'
+      }
+    };
+
+    function toggleLanguageDropdown() {
+      const dropdown = document.getElementById('languageDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    function changeLanguage(lang) {
+      const translation = translations[lang];
+      
+      // Update main title
+      document.getElementById('main-title').innerHTML = translation['main-title'];
+      
+      // Update all text elements
+      Object.keys(translation).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+          if (key === 'pages-list') {
+            element.innerHTML = translation[key].map(item => `<li>${item}</li>`).join('');
+          } else if (key === 'social-networks-list') {
+            element.innerHTML = translation[key].map(item => `<li>${item}</li>`).join('');
+          } else if (key === 'payment-info-list') {
+            element.innerHTML = translation[key].map(item => `<li>${item}</li>`).join('');
+          } else {
+            element.innerHTML = translation[key];
+          }
+        }
+      });
+      
+      // Update button text
+      const button = document.querySelector('.language-btn');
+      if (lang === 'ru') button.textContent = '🌐 Язык';
+      else if (lang === 'en') button.textContent = '🌐 Language';
+      else if (lang === 'es') button.textContent = '🌐 Idioma';
+      
+      // Close dropdown
+      document.getElementById('languageDropdown').classList.remove('show');
+      
+      // Update HTML lang attribute
+      document.documentElement.lang = lang;
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('languageDropdown');
+      const button = document.querySelector('.language-btn');
+      
+      if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+  </script>
 
 </body>
 </html>
